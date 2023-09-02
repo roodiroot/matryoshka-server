@@ -28,10 +28,34 @@ model Token {
   token     String   @unique
   exp       DateTime
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @map("user_id")
   userAgent String   @map("user_agent")
-  userId    String
 
   @@map("tokens")
+}
+
+model Author {
+  id       Int       @id @default(autoincrement())
+  name     String
+  surname  String?
+  img      String
+  jobTitle String    @map("job_title")
+  article  Article[]
+
+  @@map("authors")
+}
+
+model Article {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  title       String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  text        String
+  author      Author   @relation(fields: [authorId], references: [id])
+  authorId    Int      @map("author_id")
+
+  @@map("articles")
 }
 
 enum Role {

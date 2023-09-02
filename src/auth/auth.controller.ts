@@ -12,6 +12,7 @@ import {
     ClassSerializerInterceptor,
     UseGuards,
     Query,
+    ValidationPipe,
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto';
 import { AuthService } from './auth.service';
@@ -40,7 +41,7 @@ export class AuthController {
 
     @UseInterceptors(ClassSerializerInterceptor)
     @Post('register')
-    async register(@Body() dto: RegisterDto) {
+    async register(@Body(new ValidationPipe()) dto: RegisterDto) {
         const user = await this.authService.register(dto);
         if (!user) {
             throw new BadRequestException(
@@ -51,7 +52,7 @@ export class AuthController {
     }
 
     @Post('login')
-    async login(@Body() dto: LoginDto, @Res() res: Response, @UserAgent() agent: string) {
+    async login(@Body(new ValidationPipe()) dto: LoginDto, @Res() res: Response, @UserAgent() agent: string) {
         const tokens = await this.authService.login(dto, agent);
         if (!tokens) {
             throw new BadRequestException(`Не получется войти с данными ${JSON.stringify(dto)}`);

@@ -24,6 +24,10 @@
             "@user/*": ["src/user/*"],
             "@auth": ["src/auth"],
             "@auth/*": ["src/auth/*"],
+            "@article": ["src/content/article"],
+            "@article/*": ["src/content/article/*"],
+            "@author": ["src/content/author"],
+            "@author/*": ["src/content/author/*"],
             "@common": ["libs/common/src"],
             "@common/*": ["libs/common/src/*"]
         }

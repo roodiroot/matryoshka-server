@@ -2,8 +2,8 @@ import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Parse
 import { UserService } from './user.service';
 import { UserResponse } from './responses';
 import { CurrentUser, Roles } from '@common/decorators';
-import { JwtPayload } from '@auth/interfaces';
-import { RolesGuard } from '@auth/guards/role.guard';
+import { JwtPayload } from 'src/auth/interfaces';
+import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Role, User } from '@prisma/client';
 
 @Controller('user')

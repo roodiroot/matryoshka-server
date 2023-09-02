@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException, ConflictException, BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException, ConflictException, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 import { LoginDto, RegisterDto } from './dto';
 import { Tokens } from './interfaces';

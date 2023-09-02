@@ -1,4 +1,4 @@
-import { JwtPayload } from '@auth/interfaces';
+import { JwtPayload } from 'src/auth/interfaces';
 import { convertToSecondsUtil } from '@common/utils';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { ForbiddenException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
@@ -46,7 +46,7 @@ export class UserService {
         if(!user){
             const user = await this.prismaService.user.findFirst({
                 where: {
-                    OR: [{ id: idOrEmail }, { email: idOrEmail }],
+                    OR: [{ id: String(idOrEmail) }, { email: String(idOrEmail) }],
                 },
             });
             if(!user){
