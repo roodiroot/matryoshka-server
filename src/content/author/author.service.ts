@@ -6,7 +6,7 @@ import { CreateAuthorDto } from './dto/create-author.dto';
 export class AuthorService {
     constructor(private prismaService: PrismaService){}
 
-    async createAuthor(dto: CreateAuthorDto){
+    async create(dto: CreateAuthorDto){
         const author = await this.prismaService.author.create({
             data: {
                 name: dto.name,
@@ -19,14 +19,14 @@ export class AuthorService {
         return author
     }
 
-    async findAuthor(id: number){
+    async findOne(id: number){
         const author = await this.prismaService.author.findUnique({
             where: {id}
         })
         return author
     }
 
-    async getAllAuthor(){
+    async getAll(){
         const authors = await this.prismaService.author.findMany()
         return authors
     }

@@ -41,6 +41,7 @@ model Author {
   img      String
   jobTitle String    @map("job_title")
   article  Article[]
+  review   Review[]
 
   @@map("authors")
 }
@@ -52,10 +53,57 @@ model Article {
   description String
   createdAt   DateTime @default(now()) @map("created_at")
   text        String
-  author      Author   @relation(fields: [authorId], references: [id])
+  author      Author   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int      @map("author_id")
 
   @@map("articles")
+}
+
+model Project {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  teme        String
+  title       String
+  description String
+  img         String
+  article     String
+  review      Review?
+  stack       String[]
+  infoProject InfoProject[]
+  achieved    Achieved[]
+
+  @@map("projects")
+}
+
+model InfoProject {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  project     Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   Int      @map("project_id")
+
+  @@map("list_info_projects")
+}
+
+model Review {
+  id        Int     @id @default(autoincrement())
+  text      String
+  author    Author  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  Int     @map("author_id")
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId Int     @unique @map("project_id")
+
+  @@map("reviews")
+}
+
+model Achieved {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  project     Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   Int     @map("project_id")
+
+  @@map("achieveds")
 }
 
 enum Role {

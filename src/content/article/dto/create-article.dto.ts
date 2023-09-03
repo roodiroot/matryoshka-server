@@ -13,6 +13,6 @@ export class CreateArticleDto {
     @IsString()
     description: string
 
-    @IsNumber()
-    authorId: number
+    @IsString()
+    authorId: string
 }

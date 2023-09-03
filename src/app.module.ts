@@ -5,12 +5,28 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { ArticleModule } from './content/article/article.module';
-import { AuthorModule } from './content/author/author.module';
-import { ProjectModule } from './project/project.module';
+import { ArticleModule } from '@article/article.module';
+import { AuthorModule } from '@author/author.module';
+import { ProjectModule } from '@project/project.module';
+import { ReviewModule } from '@review/review.module';
+import { AchievedModule } from '@achieved/achieved.module';
+import { InfoModule } from '@info/info.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
-    imports: [UserModule, PrismaModule, AuthModule, ConfigModule.forRoot({ isGlobal: true }), ArticleModule, AuthorModule, ProjectModule],
+    imports: [
+      ConfigModule.forRoot({ isGlobal: true }), 
+      UserModule, 
+      PrismaModule, 
+      AuthModule, 
+      ArticleModule, 
+      AuthorModule, 
+      ProjectModule, 
+      ReviewModule,
+      AchievedModule,
+      InfoModule,
+      FilesModule
+    ],
     providers: [{
         provide: APP_GUARD,
         useClass: JwtAuthGuard,

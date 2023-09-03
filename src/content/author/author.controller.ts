@@ -13,13 +13,13 @@ export class AuthorController {
     @UseGuards(RolesGuard)
     @Roles(Role.ADMIN)
     @Post()
-    async create(@Body() dto: CreateAuthorDto){
-        return await this.authorService.createAuthor(dto)
+    async createAuthor(@Body() dto: CreateAuthorDto){
+        return await this.authorService.create(dto)
     }
 
     @Public()
     @Get()
-    async getAll(){
-        return await this.authorService.getAllAuthor()
+    async getAllAuthor(){
+        return await this.authorService.getAll()
     }
 }

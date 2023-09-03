@@ -28,8 +28,18 @@
             "@article/*": ["src/content/article/*"],
             "@author": ["src/content/author"],
             "@author/*": ["src/content/author/*"],
+            "@project": ["src/content/project"],
+            "@project/*": ["src/content/project/*"],
+            "@review": ["src/content/review"],
+            "@review/*": ["src/content/review/*"],
+            "@achieved": ["src/content/achieved"],
+            "@achieved/*": ["src/content/achieved/*"],
+            "@info": ["src/content/info"],
+            "@info/*": ["src/content/info/*"],
             "@common": ["libs/common/src"],
-            "@common/*": ["libs/common/src/*"]
+            "@common/*": ["libs/common/src/*"],
+            "@files": ["src/files"],
+            "@files/*": ["src/files/*"]
         }
     }
 }
