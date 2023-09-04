@@ -36,13 +36,7 @@ export class FilesService {
                 return null
             })
         }
-
         return textReplace
-    }
-
-
-    private replaceText(text: string, fileName: string){
-        
     }
 }
 

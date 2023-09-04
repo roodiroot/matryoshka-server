@@ -41,6 +41,8 @@ export class ProjectController {
         return await this.projectService.getAll()
     }
 
+    @UseGuards(RolesGuard)
+    @Roles(Role.ADMIN)
     @Delete(":id")
     async deleteProject(@Param("id") id: string){
         if(isNaN(Number(id))){

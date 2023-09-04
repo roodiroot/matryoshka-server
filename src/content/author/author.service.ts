@@ -1,20 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
+import { FilesService } from '@files/files.service';
 
 @Injectable()
 export class AuthorService {
-    constructor(private prismaService: PrismaService){}
+    constructor(
+        private prismaService: PrismaService,
+        private filesService: FilesService
+        ){}
 
-    async create(dto: CreateAuthorDto){
+    async create(dto: CreateAuthorDto, img: Express.Multer.File){
+        const fileName = await this.filesService.createFile(img)
+        if(!fileName){
+            throw new BadRequestException('Не удалось загрузить изображение')
+        }
         const author = await this.prismaService.author.create({
             data: {
                 name: dto.name,
                 surname: dto.surname,
                 jobTitle: dto.jobTitle,
-                img: dto.img,
+                img: fileName,
             }
         })
+        if(!author){
+            throw new BadRequestException('Не удалось создать автора')
+        }
 
         return author
     }

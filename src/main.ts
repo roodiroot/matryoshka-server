@@ -6,11 +6,16 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 
 async function bootstrap() {
+    const PORT = process.env.PORT || 5000;
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
     app.use(cookieParser())
     app.useStaticAssets(path.join(__dirname, "..", "static"))
+    app.enableCors({
+        credentials: true,
+        origin: [...process.env.WEBSITE],
+      });
     app.setGlobalPrefix('api')
     app.useGlobalPipes(new ValidationPipe());
-    await app.listen(3000);
+    await app.listen(PORT, () => console.log(`Srver started on PORT ${PORT}`));
 }
 bootstrap();
