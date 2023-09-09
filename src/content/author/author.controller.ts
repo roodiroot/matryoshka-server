@@ -1,9 +1,9 @@
-import { BadRequestException, Body, Controller, FileTypeValidator, Get, MaxFileSizeValidator, Param, ParseFilePipe, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, FileTypeValidator, Get, MaxFileSizeValidator, Param, ParseFilePipe, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { CreateAuthorDto } from '@author/dto/create-author.dto';
 import { AuthorService } from '@author/author.service';
 import { RolesGuard } from '@auth/guards/role.guard';
 import { Public, Roles } from '@common/decorators';
-import { Role } from '@prisma/client';
+import { AuthorRole, Role } from '@prisma/client';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 
@@ -41,7 +41,7 @@ export class AuthorController {
 
     @Public()
     @Get()
-    async getAllAuthor(){
-        return await this.authorService.getAll()
+    async getAllAuthor(@Query('type') type?: AuthorRole){
+        return await this.authorService.getAll(type)
     }
 }

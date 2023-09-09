@@ -35,13 +35,14 @@ model Token {
 }
 
 model Author {
-  id       Int       @id @default(autoincrement())
+  id       Int         @id @default(autoincrement())
   name     String
   surname  String?
   img      String
-  jobTitle String    @map("job_title")
+  jobTitle String      @map("job_title")
   article  Article[]
   review   Review[]
+  type     AuthorRole?
 
   @@map("authors")
 }
@@ -109,6 +110,11 @@ model Achieved {
 enum Role {
   ADMIN
   USER
+}
+
+enum AuthorRole {
+  TEAM
+  CLIENT
 }
 
 enum Provider {

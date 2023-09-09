@@ -1,3 +1,4 @@
+import { AuthorRole } from "@prisma/client";
 import { IsString } from "class-validator";
 
 export class CreateAuthorDto {
@@ -10,4 +11,7 @@ export class CreateAuthorDto {
 
     @IsString()
     jobTitle: string;
+
+    @IsString()
+    type: AuthorRole
 }
