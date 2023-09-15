@@ -12,7 +12,7 @@ async function bootstrap() {
     app.useStaticAssets(path.join(__dirname, "..", "static"))
     app.enableCors({
         credentials: true,
-        origin: "http://localhost:3000",
+        origin: ["https://matryoshka-studio.ru", "http://localhost:3000"],
       });
     app.setGlobalPrefix('api')
     app.useGlobalPipes(new ValidationPipe());
